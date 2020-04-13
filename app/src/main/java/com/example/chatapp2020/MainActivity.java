@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     EditText etId, etPassword;
+    String stEmail, stPassword;
     private FirebaseAuth mAuth;
     ProgressBar progressBar;
     @Override
@@ -40,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String stEmail = etId.getText().toString();
-                String stPassword = etPassword.getText().toString();
+                stEmail = etId.getText().toString();
+                stPassword = etPassword.getText().toString();
                 if(stEmail.isEmpty()){
                     Toast.makeText(MainActivity.this, "Please insert Email", Toast.LENGTH_LONG).show();
                     return;
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
                                     Log.d(TAG, "stUserEmail: " + stUserEmail + ", stUserName : " + stUserName);
 
                                     Intent in = new Intent(MainActivity.this, ChatActivity.class);
+                                    in.putExtra("email", stEmail);
                                     startActivity(in);
 //                                    updateUI(user);
                                 } else {
